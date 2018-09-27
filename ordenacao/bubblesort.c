@@ -1,21 +1,23 @@
 #include <stdio.h>
-void bubble_sort(int v[], int tam){
-  int aux = 0, fim, continua;
 
-  fim = tam;
-  do {
+void bubble_sort(int v[], int tam){
+  int aux = 0, continua = 0;
+
+
+  for(int i = tam-1; i >= 0; i--){
     continua = 0;
-    for(int i = 0; i < fim-1; i++){
-      if(v[i] > v[i+1]){
-        aux = v[i];
-        v[i] = v[i+1];
-        v[i+1] = aux;
-        continua = i;
+    for(int j = 0; j < i; j++){
+      if(v[j] > v[j+1]){
+        aux = v[j];
+        v[j] = v[j+1];
+        v[j+1] = aux;
+        continua = 1;
       }
     }
-    fim--;
-  } while(continua != 0);
-
+    if(continua == 0){
+      i = -1;
+    }
+  }
 }
 int main(void) {
   int v[10] = {0,6,8,9,1,2,4,5,3,7};
