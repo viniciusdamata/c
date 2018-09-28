@@ -98,7 +98,7 @@ no *remove_lista(lista*l, int x){
         No = aux->prox;
         aux->prox = No->prox;
         No->prox = NULL;
-        if(No = l->  ultimo){
+        if(No == l->  ultimo){
           l->ultimo = aux;
         }
 
@@ -140,5 +140,4 @@ int main(int argc, char const *argv[]) {
   insere_inicio(l, 5);
   printf("%i\n", l->primeiro->info);
   return 0;
-  free(l);
 }
