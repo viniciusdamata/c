@@ -23,9 +23,9 @@ void insere_inicio(lista *l, int x){
     No->info = x;
     No->prox = l->primeiro;
     l->primeiro = No;
-      if(lista_vazia(l)){
-        l->ultimo = No;
-      }
+    if(lista_vazia(l)){
+      l->ultimo = No;
+    }
 
   }
 }
@@ -80,45 +80,45 @@ no *remove_lista(lista*l, int x){
   if(lista_vazia(l)){
     printf("Underflow!\n");
   }else{
-     if(x == l->primeiro->info){
-       No = l->primeiro;
-       if(l->primeiro == l->ultimo){
-         inicializa_lista(l);
-       }else{
-         l->primeiro = No->prox;
-         No->prox = NULL;
-       }
-     }else{
-       no *aux = l->primeiro;
+    if(x == l->primeiro->info){
+      No = l->primeiro;
+      if(l->primeiro == l->ultimo){
+        inicializa_lista(l);
+      }else{
+        l->primeiro = No->prox;
+        No->prox = NULL;
+      }
+    }else{
+      no *aux = l->primeiro;
 
-       while (aux->prox != NULL && aux->prox->info) {
-         aux = aux->prox;
-       }
-       if(aux->prox != NULL){
-         No = aux->prox;
-         aux->prox = No->prox;
-         No->prox = NULL;
-         if(No = l->  ultimo){
-           l->ultimo = aux;
-         }
+      while (aux->prox != NULL && aux->prox->info != x) {
+        aux = aux->prox;
+      }
+      if(aux->prox != NULL){
+        No = aux->prox;
+        aux->prox = No->prox;
+        No->prox = NULL;
+        if(No = l->  ultimo){
+          l->ultimo = aux;
+        }
 
-       }else{
-         printf("Elemento nao encontrado\n");
-       }
+      }else{
+        printf("Elemento nao encontrado\n");
+      }
 
 
-     }
-   }
-   return No;
- }
- no *busca_lista(lista *l, int x){
-   no *No;
-   No = l->primeiro;
-   while(No != NULL && No->info != x){
-     No = No->prox;
-   }
-   return No;
- }
+    }
+  }
+  return No;
+}
+no *busca_lista(lista *l, int x){
+  no *No;
+  No = l->primeiro;
+  while(No != NULL && No->info != x){
+    No = No->prox;
+  }
+  return No;
+}
 
 void libera(lista *l){
   if(!lista_vazia){
