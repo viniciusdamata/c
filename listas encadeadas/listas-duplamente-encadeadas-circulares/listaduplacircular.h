@@ -1,16 +1,16 @@
-#ifndef listas_h
-#define listas_h
+#ifndef listaduplacircular_h
+#define listaduplacircular_h
 
 typedef struct no no;
 
 struct no{
   int info;
   no *prox;
+  no *ant;
 };
 
 
 typedef struct{
-  no *primeiro;
   no *ultimo;
 }lista;
 

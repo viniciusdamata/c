@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "listas.h"
+#include "lista.h"
 
 
 void inicializa_lista(lista *l){

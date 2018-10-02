@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "listas.h"
+#include "listacircular.h"
 
 /*implementação em linguagem c do algoritmo de
 *listas simplesmente encadeadas circulares
@@ -92,7 +92,7 @@ void insere_ordenado(lista *l, int x){
         while(aux != l->ultimo && aux->prox->info <= x)
           aux = aux->prox;
         }
-        No = aux->prox;
+        No->prox = aux->prox;
         aux->prox = No;
 
 
@@ -104,7 +104,7 @@ no *remove_lista(lista *l, int x){
       printf("Underflow");
     }else{
       no *No, *aux;
-
+      No = NULL;
       aux = l->ultimo;
 
       while(aux->prox != l->ultimo && aux->prox->info != x){
@@ -122,9 +122,9 @@ no *remove_lista(lista *l, int x){
           }
         }
       }
+      return No;
     }
-
-}
+  }
 
 void libera(lista *l){
   if(!lista_vazia){
@@ -143,9 +143,19 @@ int main(int argc, char const *argv[]) {
   lista *l = malloc(sizeof(lista));
   inicializa_lista(l);
   insere_inicio(l, 10);
-  printf("%i\n",l->ultimo->prox->info);
-  insere_fim(l, 5);
-  printf("%i\n",l->ultimo->info);
+  insere_inicio(l, 5);
+  insere_ordenado(l, 3);
+  insere_fim(l, 15);
+  insere_ordenado(l, 6);
+
+  no *aux = l->ultimo->prox;
+
+  while(aux != l->ultimo){
+    printf("%i\n",aux->info);
+    aux = aux->prox;
+  }
+  printf("%i\n", remove_lista(l, 3)->info);
+
   free(l);
 
 

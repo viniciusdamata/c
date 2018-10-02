@@ -1,5 +1,5 @@
-#ifndef listas_h
-#define listas_h
+#ifndef listadupla_h
+#define listasdupla_h
 
 typedef struct no no;
 
@@ -11,6 +11,7 @@ struct no{
 
 
 typedef struct{
+  no *primeiro;
   no *ultimo;
 }lista;
 

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "listas.h"
+#include "listadupla.h"
 
 /*implementação em linguagem c do algoritmo de
 *listas duplamente encadeadas
@@ -16,7 +16,7 @@ int lista_vazia(lista *l){
 }
 
 no *busca_lista(lista *l, int x){
-   no *No;
+   no *No = NULL;
    No = l->primeiro;
    while(No != NULL && No->info != x){
      No = No->prox;
@@ -35,7 +35,7 @@ void insere_fim(lista *l, int x){
     if(lista_vazia(l)){
       l->primeiro = No;
     }else{
-      l->ultimo->ant = No;
+      l->ultimo->prox = No;
     }
     l->ultimo = No;
   }
@@ -92,13 +92,22 @@ no *remove_lista(lista *l, int x){
 
   if(No == NULL){
     printf("Elemento nao encontrado! ");
+  }else if(l->primeiro == l->ultimo){
+    inicializa_lista(l);
+  }else if(No == l->primeiro){
+    l->primeiro = No->prox;
+    l->primeiro->ant = NULL;
+    No->prox = NULL;
+  }else if(No == l->ultimo){
+    l->ultimo = No->ant;
+    l->ultimo->prox = NULL;
+    No->ant = NULL;
   }else{
-    No->prox->ant = No->ant;
     No->ant->prox = No->prox;
+    No->prox->ant = No->ant;
     No->ant = NULL;
     No->prox = NULL;
   }
-  return No;
 }
 
 void libera(lista *l){
@@ -120,6 +129,12 @@ int main(int argc, char const *argv[]) {
   printf("%i\n",l->primeiro->info);
   insere_fim(l, 5);
   printf("%i\n",l->ultimo->info);
+  no *No = remove_lista(l, 5);
+  if(No == NULL){
+    printf("naocarai\n");
+  }else{
+    printf("REMOVIDO %i\n",No->info);
+  }
   free(l);
 
 

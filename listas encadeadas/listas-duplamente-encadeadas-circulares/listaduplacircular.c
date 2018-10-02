@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "listas.h"
+#include "listaduplacircular.h"
 
 /*implementação em linguagem c do algoritmo de
 *listas duplamente encadeadas
@@ -106,6 +106,9 @@ no *remove_lista(lista *l, int x){
   if(No == NULL){
     printf("Elemento nao encontrado! ");
   }else{
+    if(No == l->ultimo){
+      l->ultimo = l->ultimo->ant;
+    }
     No->prox->ant = No->ant;
     No->ant->prox = No->prox;
     No->ant = No;
@@ -131,11 +134,23 @@ int main(int argc, char const *argv[]) {
   lista *l = malloc(sizeof(lista));
   inicializa_lista(l);
   insere_inicio(l, 10);
+  insere_inicio(l, 2);
+  insere_inicio(l, 1);
+
   printf("%i\n",l->ultimo->info);
   insere_fim(l, 5);
   printf("%i\n",l->ultimo->info);
+  printf("removido%i\n",remove_lista(l, 5)->info);
+
+  no *aux;
+  aux = l->ultimo->prox;
+  while(aux != l->ultimo){
+    printf("ELEM %i\n",aux->info);
+   aux = aux->prox;
+  }
+  printf("ELEM %i\n",aux->info);
   free(l);
 
-
+  return 0;
 
 }
